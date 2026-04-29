@@ -21,4 +21,21 @@ public class UsuarioService {
         }
         return null;
     }
+
+    public Usuario buscarUsuario(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
+    public Usuario editarUsuario(Long id, Usuario datos) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario != null) {
+            usuario.setNombre(datos.getNombre());
+            usuario.setNombreUsuario(datos.getNombreUsuario());
+            usuario.setCorreo(datos.getCorreo());
+            usuario.setContrasena(datos.getContrasena());
+            usuario.setAvatar(datos.getAvatar());
+            return usuarioRepository.save(usuario);
+        }
+        return null;
+    }
 }
